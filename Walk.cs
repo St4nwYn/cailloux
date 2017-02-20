@@ -1,26 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Timers;
 
 public class Walk : MonoBehaviour
 {
-    public float speed;
-	// Use this for initialization
-	void Start ()
+
+    public float walkSpeed;
+    public float runSpeed;
+    public float crouchSpeed;
+    float dist;
+    // Use this for initialization
+    void Start()
     {
-        speed = 0.1f;
+        walkSpeed = 0.1f;
+        runSpeed = 0.2f;
+        crouchSpeed = 0.05f;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         Movement();
-	}
+    }
 
     //Permise movements of the player with the different buttons
+    private bool isRunning = false;
     void Movement()
     {
-        Timer timer = new Timer(1000);
+        float speed;
+        if (isRunning)
+            speed = runSpeed;
+        else
+            speed = walkSpeed;
         if (Input.GetKey(KeyCode.LeftArrow))
             this.transform.Translate(Vector3.left * speed);
         if (Input.GetKey(KeyCode.RightArrow))
@@ -29,13 +39,12 @@ public class Walk : MonoBehaviour
             this.transform.Translate(Vector3.forward * speed);
         if (Input.GetKey(KeyCode.DownArrow))
             this.transform.Translate(Vector3.back * speed);
-        /*if (Input.GetKey(KeyCode.Space))
-        {
+        if (Input.GetKey(KeyCode.Space))
             this.transform.Translate(Vector3.up * speed);
-            timer.Enabled = true;
-            timer.Start();
-            this.transform.Translate(Vector3.down * speed);
-        }*/
 
+        if (Input.GetKey(KeyCode.LeftShift))
+            isRunning = true;
+        else
+            isRunning = false;
     }
 }
