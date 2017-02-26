@@ -11,7 +11,7 @@ public class Walk : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CharacterCollider = gameObject.GetComponent<CharacterController>();
+       
         //Prevent the player from falling  
         this.GetComponent<Rigidbody>().freezeRotation = true;
 
