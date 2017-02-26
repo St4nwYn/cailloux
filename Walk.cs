@@ -11,9 +11,11 @@ public class Walk : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+
         //Prevent the player from falling  
         this.GetComponent<Rigidbody>().freezeRotation = true;
+
+        CharacterCollider = gameObject.GetComponent<CharacterController>();
 
     }
 
@@ -57,12 +59,12 @@ public class Walk : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouching && !isRunning)
         {
             isCrouching = true;
-            //this.CharacterCollider.height = 0.5f;
+            CharacterCollider.height = 1.0f;
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl) && isCrouching)
         {
             isCrouching = false;
-            //this.CharacterCollider.height = 1.0f;
+            CharacterCollider.height = 1.8f;
         }
     }
 }
